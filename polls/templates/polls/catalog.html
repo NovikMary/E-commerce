@@ -1,0 +1,38 @@
+{% load staticfiles %}
+
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}"/>
+    </head>
+    <body>
+        <h1 style = align="center"color: #FCF108>E-commerce</h1>
+        <!--Начало общей парнели кнопок-->
+        <ul class="nav nav-pills" align ="right">
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation"><a href="#">Profile</a></li>
+            <li role="presentation"><a href="#">MyCart</a></li>
+        </ul>
+        <!--Конец общей парнели кнопок-->
+
+        <!--Начало списка элементов-->
+        <div class="container">
+        <div class="row">
+        {%for Item in Items%}
+            <div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="{% static Item.photo %}" alt="sorry">
+                        <div class="caption">
+                            <h3>{{Item.name}}</h3>
+                            <p>price: {{Item.price}}</p>
+                            <p><a href="item_{{Item.id}}" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {%endfor%}
+        </div>
+        </div>
+        <!--Конец списка элементов-->
+    </body>
+</html>
