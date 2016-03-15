@@ -4,6 +4,7 @@ from django.template.loader import get_template
 from django.shortcuts import render_to_response
 from django.template import Context
 from django.core.paginator import Paginator
+from django.contrib.auth import logout
 
 def catalog(request, number_page = 1):
     all_Items = Item.objects.all()
@@ -31,6 +32,7 @@ def home(request):
     """
     Home page with auth links.
     """
+    print(request.user.is_authenticated())
     if request.user.is_authenticated():
         return HttpResponse("{0} <a href='/accounts/logout'>exit</a>".format(request.user))
     else:
@@ -39,7 +41,7 @@ def home(request):
 
 def account_profile(request):
     """
-    Show user greetings. ONly for logged in users.
+    Show user greetings. Only for logged in users.
     """
     return HttpResponse("Hi, {0}! Nice to meet you.".format(request.user.first_name))
 
@@ -50,6 +52,6 @@ def account_logout(request):
     """
     logout(request)
     return redirect('/')  
-    
+
 
 pass
