@@ -10,10 +10,10 @@ class Item(models.Model):
     def __str__(self):
         return self.name
 
-#class Comments(models.Model):
-#	class Meta:
-#		db_table = "comments"
-#	comment_text = models.TextField()
-#	comments_Item = ForeignKey(Item)
+class Comments(models.Model):
+	class Meta:
+		db_table = "comments"
+	comment_text = models.TextField()
+	comments_Item = models.ForeignKey(Item)
 
 # Create your models here.

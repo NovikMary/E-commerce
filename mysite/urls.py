@@ -16,11 +16,26 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
+from django.conf.urls.static import static
+import social.apps.django_app.urls
+import polls.views
+
 
 urlpatterns = [
+    url(r'^$', polls.views.catalog),
+    url(r'^item_(?P<Item_id>\d+)$', polls.views.item),
+    url(r'^page/item_(?P<Item_id>\d+)$', polls.views.item),
     url(r'^admin/', admin.site.urls),
-    url(r'^polls/', include('polls.urls')),
+    url(r'^cart\?*', polls.views.mycart),
+    url(r'^page/(\d+)$', polls.views.catalog),
+
+
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
 		{'document_root', settings.STATIC_ROOT}
 	),
-]
+    url('', include(social.apps.django_app.urls, namespace='social')),
+    url(r'^accounts/logout/$', polls.views.account_logout, name='logout'),
+    url(r'^accounts/login/$', polls.views.home, name='login'),
+    url(r'^accounts/profile/$', polls.views.account_profile, name='profile'),
+
+]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

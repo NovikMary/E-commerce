@@ -1,0 +1,14 @@
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>main</title>>
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}"/>
+    </head>
+    <body>
+    <h1>MY ONLINE SHOP</h1> 
+    {% block item %}
+    {% endblock %}    
+    </body>
+</html>
+
