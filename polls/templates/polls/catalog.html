@@ -2,6 +2,7 @@
 
 <html>
     <head>
+        <style>body{padding-top:60px;}</style>
         <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}"/>
     </head>
     <body>
@@ -72,7 +73,7 @@
                         <div class="caption">
                             <h3>{{Item.name}}</h3>
                             <p>price: {{Item.price}}</p>
-                            <p><a href="item_{{Item.id}}" class="btn btn-primary" role="button">Show</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                            <p><a href="item_{{Item.id}}" class="btn btn-primary" role="button">Show</a> <a href="payment/cart/" class="btn btn-default" role="button">Buy</a></p>
                         </div>
                     </div>
                 </div>
@@ -91,29 +92,6 @@
            <li><a href="#">4</a></li>
             <li><a href="#">5</a></li>
             <li><a href="#">Next</a></li>
-
-
-            <script src="http://vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
-                <script type="text/javascript">
-                    VK.init(function() {
-                            VK.addCallback("onApplicationAdded", requestRights);
-                            VK.addCallback("onSettingsChanged", onSettingsChanged);
-                        }
-                    );
-
-                    function startConnect() {
-                        VK.callMethod('showInstallBox');
-                    }
-
-                    function requestRights() {
-                        VK.callMethod('showSettingsBox', 1 + 2); // 1+2 is just an example
-                    }
-
-                    function onSettingsChanged(settings) {
-                        window.location.reload();
-                    }
-                </script>
-                <a href="#" onclick="startConnect(); return false;">Click to authenticate</a>
 
           </ul>
         </nav>

@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 import social.apps.django_app.urls
 import polls.views
+import paypal.standard.ipn.urls
 
 
 urlpatterns = [
@@ -37,5 +38,9 @@ urlpatterns = [
     url(r'^accounts/logout/$', polls.views.account_logout, name='logout'),
     url(r'^accounts/login/$', polls.views.home, name='login'),
     url(r'^accounts/profile/$', polls.views.account_profile, name='profile'),
+
+    url(r'^paypal/', include(paypal.standard.ipn.urls)),
+    url(r'^payment/cart/$', polls.views.paypal_pay, name='cart'),
+    url(r'^payment/success/$', polls.views.paypal_success, name='success'),
 
 ]  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
