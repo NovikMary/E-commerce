@@ -1,23 +1,18 @@
+{% extends 'polls/main.html' %}
 {% load staticfiles %}
 
-<html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}"/>
-		<title>Товар</title>
-	</head>
-	<body>
-		<h1 style = align="center"color: #AAF108>Yooooo!!!</h1>
-			<div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <img src="{% static Item.photo %}" alt="sorry">
-                        <div class="caption">
-                            <h3>{{Item.name}}</h3>
-                            <p>price: {{Item.price}}</p>
-                            <p><a href="item_{{Item.id}}" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                        </div>
-                    </div>
+{% block body_block %}
+	<h1 style = align="center"color: #AAF108>Yooooo!!!</h1>
+	<div>
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="{% static Item.photo %}" alt="sorry">
+                <div class="caption">
+                    <h3>{{Item.name}}</h3>
+                    <p>price: {{Item.price}}</p>
+                    <p><a href="item_{{Item.id}}" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
                 </div>
             </div>
-	</body>
-</html>
+        </div>
+    </div>
+{% endblock %}

@@ -1,99 +1,42 @@
+{% extends 'polls/main.html' %}
 {% load staticfiles %}
 
-<html>
-    <head>
-        <style>body{padding-top:60px;}</style>
-        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}"/>
-    </head>
-    <body>
-
-    <!--Начало общей парнели кнопок-->
-
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">E-commerce</a>
-                </div>
-                <div id="navbar" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="/login/vk-oauth2">Contact</a></li>
-                    </ul>
-
-                    <ul class="nav navbar-nav navbar-right">
-                        {% if username %}
-                            <li><a = href="/accounts/logout">Выйти ({{ username }})</a>></li>>
-                        {% else %}
-                            <li><a = href="/accounts/login/">Войти</a></li>
-                        {% endif %}
-                    </ul>
-                </div><!--/.nav-collapse -->
-            </div>
-        </nav>
-
-
-
-
-
-
-        <div class="top-bar">
-            <section class="top-bar-section">
-                <ul class ="right">
-                    {% if username %}
-                        <li><a = href="/auth/logout">Выйти ({{ username }})</a>></li>>
-                    {% else %}
-                        <li><a = href="/auth/login">Войти</a></li>
-                    {% endif %}
-                </ul>
-            </section>
-        </div>
-
-        <ul class="nav nav-pills" align ="right">
-            <li role="presentation" class="active"><a href="#">Home</a></li>
-            <li role="presentation"><a href="#">Profile</a></li>
-            <li role="presentation"><a href="#">Mycart</a></li>
-        </ul>
-        <!--Конец общей парнели кнопокp-->
-
-        <!--Начало списка элементов-->
-        <div class="container">
+{% block body_block %}
+    <div class="container">
         <div class="row">
         {%for Item in Items%}
             <div>
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail" id="item_cont">
-                        <img class="slide-image" src="{% static Item.photo %}" alt="sorry">
+                        <!--<img class="slide-image" src="{ static Item.photo }" alt="sorry">-->
                         <div class="caption">
                             <h3>{{Item.name}}</h3>
                             <p>price: {{Item.price}}</p>
-                            <p><a href="item_{{Item.id}}" class="btn btn-primary" role="button">Show</a> <a href="payment/cart/" class="btn btn-default" role="button">Buy</a></p>
+                            <p><a href="item_{{Item.id}}" class="btn btn-primary" role="button">Show</a> <a href="payment/cart/" class="btn btn-default" role="button">Buy now</a>  
+                            {% if Item in Cart_items %}
+                                Added
+                            {% else %}
+                                <a class="btn btn-default add" id="item_{{Item.id}}" role="button">Add to my cart</a>
+                            {% endif %}
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         {%endfor%}
         </div>
-        </div>
+    </div>
 
-        <!--Конец списка элементов-->
-        <nav>
-          <ul class="pagination">
-            <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-            <li class="active"><a href="/page/1">1 <span class="sr-only">(current)</span></a></li>
-            <li class="disabled"><a href="/page/2">2 <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">3</a></li>
-           <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">Next</a></li>
+    <nav>
+      <ul class="pagination">
+        <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+        <li class="active"><a href="/page/1">1 <span class="sr-only">(current)</span></a></li>
+        <li class="disabled"><a href="/page/2">2 <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">3</a></li>
+       <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">Next</a></li>
 
-          </ul>
-        </nav>
-    </body>
-</html>
+      </ul>
+    </nav>
+{% endblock %}

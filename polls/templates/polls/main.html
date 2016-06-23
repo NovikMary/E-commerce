@@ -2,13 +2,72 @@
 
 <html>
     <head>
-        <title>main</title>>
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>
+			$(document).ready(function(){
+			  $( "a.add" ).click(function(){
+			    var current_button = $(this);
+			    $.ajax({
+			        url: "/add-to-cart/",
+			        type: "GET",
+			        data: {"item": $(this).attr('id')},
+			        success: function(data){
+			          current_button.replaceWith( data );
+			        }
+			    });
+			   });
+			});
+
+			$(document).ready(function(){
+			  $( "a.remove" ).click(function(){
+			    var current_button = $(this);
+			    var id = $(this).attr('id')
+			    $.ajax({
+			        url: "/delete-from-cart/",
+			        type: "GET",
+			        data: {"item": $(this).attr('id')},
+			        success: function(data){
+			        	$( "#"+id+"_").remove()
+			        }
+			    });
+			   });
+			});
+        </script>
+        <style>body{padding-top:60px;}</style>
         <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}"/>
     </head>
     <body>
-    <h1>MY ONLINE SHOP</h1> 
-    {% block item %}
-    {% endblock %}    
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="/">E-commerce</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/cart/">Mycart</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if username %}
+                            <li><a = href="/login/vk-oauth2">Выйти ({{ username }})</a>></li>>
+                        {% else %}
+                            <li><a = href="/login/vk-oauth2">Войти</a></li>
+                        {% endif %}
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+
+    {% block body_block %}
+    {% endblock %}
     </body>
 </html>
-

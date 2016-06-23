@@ -1,20 +1,27 @@
+{% extends 'polls/main.html' %}
 {% load staticfiles %}
 
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}"/>
-    </head>
-    <body>
-        <div class="media">
-            <div class="media-left media-middle">
-                <a href="#">
-                <img class="media-object" src="..." alt="...">
-                </a>
+{% block body_block %}
+    <div class="container">
+        <div class="row">
+        {%for Item in Cart_items%}
+            <div id="item_{{Item.id}}_">
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail" id="item_cont">
+                        <!--<img class="slide-image" src="{ static Item.photo }" alt="sorry">-->
+                        <div class="caption">
+                            <h3>{{Item.name}}</h3>
+                            <p>price: {{Item.price}}</p>
+                            <p><a class="btn btn-primary remove" id="item_{{Item.id}}" role="button">Remove</a></p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="media-body">
-                <h4 class="media-heading">Middle aligned media</h4>
-                ...
-            </div>
-        </div>           
-    </body>
-</html>
+        {%endfor%}
+        </div>
+    </div>
+
+    <div class="col-md-12 text-center"> 
+        <a href="/payment/cart/" class="btn btn-primary">Pay for cart</a>
+    </div>
+{% endblock %}

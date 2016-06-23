@@ -27,9 +27,10 @@ urlpatterns = [
     url(r'^item_(?P<Item_id>\d+)$', polls.views.item),
     url(r'^page/item_(?P<Item_id>\d+)$', polls.views.item),
     url(r'^admin/', admin.site.urls),
-    url(r'^cart\?*', polls.views.mycart),
+    url(r'^cart/*', polls.views.mycart),
     url(r'^page/(\d+)$', polls.views.catalog),
-
+    url(r'^add-to-cart/$', polls.views.add),
+    url(r'^delete-from-cart/$', polls.views.delete),
 
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
 		{'document_root', settings.STATIC_ROOT}
