@@ -4,6 +4,25 @@
 {% block body_block %}
     <div class="container">
         <div class="row">
+            <div class="col-md-6">
+                {% if category_id == 0 %}
+                    <a href="/page/1" class="btn btn-primary custom-button-width" role="button">All</a>
+                {% else %}
+                    <a href="/page/1" class="btn btn-default custom-button-width" role="button">All</a>
+                {% endif %}
+                {% for category in categories %}
+                    {% if category.id == category_id %}
+                        <a href="/page/1/category/{{category.id}}" class="btn btn-primary custom-button-width">{{category.name}}</a>
+                    {% else %}
+                        <a href="/page/1/category/{{category.id}}" class="btn btn-default custom-button-width">{{category.name}}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
         {%for Item in Items%}
             <div>
                 <div class="col-sm-6 col-md-4">
@@ -12,7 +31,7 @@
                         <div class="caption">
                             <h3>{{Item.name}}</h3>
                             <p>price: {{Item.price}}</p>
-                            <p><a href="item_{{Item.id}}" class="btn btn-primary" role="button">Show</a> <a href="payment/cart/" class="btn btn-default" role="button">Buy now</a>  
+                            <p><a href="item_{{Item.id}}" class="btn btn-primary" role="button">Show</a>
                             {% if Item in Cart_items %}
                                 Added
                             {% else %}
@@ -31,7 +50,7 @@
       <ul class="pagination">
         <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
         <li class="active"><a href="/page/1">1 <span class="sr-only">(current)</span></a></li>
-        <li class="disabled"><a href="/page/2">2 <span class="sr-only">(current)</span></a></li>
+        <li class="disabled"><a href="/page/2/category/{{category_id}}">2 <span class="sr-only">(current)</span></a></li>
         <li><a href="#">3</a></li>
        <li><a href="#">4</a></li>
         <li><a href="#">5</a></li>

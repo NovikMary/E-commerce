@@ -9,10 +9,17 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.core.urlresolvers import reverse
 from paypal.standard.forms import PayPalPaymentsForm
-import random
+from django.http import HttpResponseRedirect
 
-def catalog(request, number_page = 1):
-    all_Items = Item.objects.all()
+def redirect_catalog(request):
+    return HttpResponseRedirect("/page/1")
+
+def catalog(request, number_page = 1, category_id = 0):
+    category_id = int(category_id)
+    if category_id == 0:
+        all_Items = Item.objects.all()
+    else:
+        all_Items = Item.objects.filter(categories__in=[category_id])
     current_page = Paginator(all_Items, 6)
     ps = get_template('polls/catalog.html')
 
@@ -22,8 +29,9 @@ def catalog(request, number_page = 1):
     except:
         cart = Cart()
         cart.save()
-    
-    html = ps.render({'Items' : current_page.page(number_page), 'Cart_items' : cart.items.all()})
+    print(category_id)
+    html = ps.render({'Items' : current_page.page(number_page), 'Cart_items' : cart.items.all(),
+        'number_page' : number_page, 'category_id' : int(category_id), 'categories' : Category.objects.all()})
     res = HttpResponse(html)
     res.set_cookie("cart", cart.id)
     return res

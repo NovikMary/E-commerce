@@ -16,9 +16,7 @@
 			        }
 			    });
 			   });
-			});
 
-			$(document).ready(function(){
 			  $( "a.remove" ).click(function(){
 			    var current_button = $(this);
 			    var id = $(this).attr('id')
@@ -57,7 +55,7 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        {% if username %}
+                        {% if user.is_authenticated %}
                             <li><a = href="/login/vk-oauth2">Выйти ({{ username }})</a>></li>>
                         {% else %}
                             <li><a = href="/login/vk-oauth2">Войти</a></li>

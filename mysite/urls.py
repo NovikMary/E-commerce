@@ -23,12 +23,13 @@ import paypal.standard.ipn.urls
 
 
 urlpatterns = [
-    url(r'^$', polls.views.catalog),
+    url(r'^$', polls.views.redirect_catalog),
     url(r'^item_(?P<Item_id>\d+)$', polls.views.item),
     url(r'^page/item_(?P<Item_id>\d+)$', polls.views.item),
     url(r'^admin/', admin.site.urls),
     url(r'^cart/*', polls.views.mycart),
     url(r'^page/(\d+)$', polls.views.catalog),
+    url(r'^page/(\d+)/category/(\d+)$', polls.views.catalog),
     url(r'^add-to-cart/$', polls.views.add),
     url(r'^delete-from-cart/$', polls.views.delete),
 
