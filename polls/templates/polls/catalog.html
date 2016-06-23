@@ -27,7 +27,7 @@
             <div>
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail" id="item_cont">
-                        <!--<img class="slide-image" src="{ static Item.photo }" alt="sorry">-->
+                        <img class="slide-image" src="{% static Item.photo %}" alt="sorry">
                         <div class="caption">
                             <h3>{{Item.name}}</h3>
                             <p>price: {{Item.price}}</p>
@@ -49,11 +49,8 @@
     <nav>
       <ul class="pagination">
         <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-        <li class="active"><a href="/page/1">1 <span class="sr-only">(current)</span></a></li>
-        <li class="disabled"><a href="/page/2/category/{{category_id}}">2 <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">3</a></li>
-       <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
+        <li><a href="/page/1">1 <span class="sr-only">(current)</span></a></li>
+        <li><a href="/page/2/category/{{category_id}}">2 <span class="sr-only">(current)</span></a></li>
         <li><a href="#">Next</a></li>
 
       </ul>
